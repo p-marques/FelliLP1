@@ -158,7 +158,10 @@ namespace FelliGame.UI.Entities
         /// <summary>
         /// Outputs the element to the console.
         /// </summary>
-        public abstract void Display();
+        public virtual void Display()
+        {
+            DisplayCleanup();
+        }
 
         /// <summary>
         /// Resets the cursor position to the element's anchor point.
@@ -209,22 +212,6 @@ namespace FelliGame.UI.Entities
         }
 
         /// <summary>
-        /// Performs some simple cleanup:
-        /// <list type="bullet">
-        /// <item>Sets console colors to default;</item>
-        /// <item>Sets cursor position to <see cref="BottomRight"/>.</item>
-        /// </list>
-        /// </summary>
-        protected void DisplayCleanup()
-        {
-            Console.BackgroundColor = UISettings.ColorConsoleBg;
-            Console.ForegroundColor = UISettings.ColorConsoleFg;
-
-            Console.CursorLeft = BottomRight.X;
-            Console.CursorTop = BottomRight.Y;
-        }
-
-        /// <summary>
         /// Gets user input key.
         /// </summary>
         /// <returns>The key hit by the user.</returns>
@@ -235,6 +222,22 @@ namespace FelliGame.UI.Entities
             ConsoleKeyInfo keyInfo = Console.ReadKey();
 
             return keyInfo.Key;
+        }
+
+        /// <summary>
+        /// Performs some simple cleanup:
+        /// <list type="bullet">
+        /// <item>Sets console colors to default;</item>
+        /// <item>Sets cursor position to <see cref="BottomRight"/>.</item>
+        /// </list>
+        /// </summary>
+        private void DisplayCleanup()
+        {
+            Console.BackgroundColor = UISettings.ColorConsoleBg;
+            Console.ForegroundColor = UISettings.ColorConsoleFg;
+
+            Console.CursorLeft = BottomRight.X;
+            Console.CursorTop = BottomRight.Y;
         }
     }
 }
