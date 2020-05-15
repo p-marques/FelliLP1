@@ -20,6 +20,21 @@ namespace FelliGame.UI
         public const ConsoleColor ColorConsoleFg = ConsoleColor.Black;
 
         /// <summary>
+        /// The default background color for the title.
+        /// </summary>
+        public const ConsoleColor ColorTitleBg = ConsoleColor.White;
+
+        /// <summary>
+        /// The default foreground color for the title.
+        /// </summary>
+        public const ConsoleColor ColorTitleFg = ConsoleColor.Black;
+
+        /// <summary>
+        /// The default color of the title border.
+        /// </summary>
+        public const ConsoleColor ColorTitleBorder = ConsoleColor.Black;
+
+        /// <summary>
         /// The default background color for a button.
         /// </summary>
         public const ConsoleColor ColorButtonBg = ConsoleColor.Black;

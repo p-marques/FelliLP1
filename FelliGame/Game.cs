@@ -30,6 +30,8 @@ namespace FelliGame
         {
             bool playing = true;
 
+            Program.UIManager.RefreshUI();
+
             while (playing)
             {
                 playing = false;
