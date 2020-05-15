@@ -1,9 +1,14 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26124.0
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FelliGame", "FelliGame\FelliGame.csproj", "{AD14E400-1BF5-497B-99CE-DF5A77236BD1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FelliGame", "FelliGame\FelliGame.csproj", "{AD14E400-1BF5-497B-99CE-DF5A77236BD1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{6241EFDF-54AA-440E-8E61-A51583418860}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,9 +18,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{AD14E400-1BF5-497B-99CE-DF5A77236BD1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -30,5 +32,11 @@ Global
 		{AD14E400-1BF5-497B-99CE-DF5A77236BD1}.Release|x64.Build.0 = Release|Any CPU
 		{AD14E400-1BF5-497B-99CE-DF5A77236BD1}.Release|x86.ActiveCfg = Release|Any CPU
 		{AD14E400-1BF5-497B-99CE-DF5A77236BD1}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E16A344A-30D5-4C5C-A2E1-22D6C817669A}
 	EndGlobalSection
 EndGlobal

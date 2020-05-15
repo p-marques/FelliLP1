@@ -36,9 +36,12 @@ namespace FelliGame.UI
         /// Creates a new instance of screen.
         /// </summary>
         /// <param name="colorBg">The background color for the screen.</param>
-        /// <param name="marginLeft">The margin that should be enforced on the left side of the screen.</param>
-        /// <param name="marginTop">The margin that should be enforced on the top of the screen.</param>
-        public Screen(ConsoleColor colorBg = UISettings.ColorConsoleBg, int marginLeft = UISettings.ScreenMarginLeft,
+        /// <param name="marginLeft">The margin that should be enforced on the 
+        /// left side of the screen.</param>
+        /// <param name="marginTop">The margin that should be enforced on the 
+        /// top of the screen.</param>
+        public Screen(ConsoleColor colorBg = UISettings.ColorConsoleBg, 
+            int marginLeft = UISettings.ScreenMarginLeft,
             int marginTop = UISettings.ScreenMarginTop)
         {
             this.backgroundColor = colorBg;
@@ -57,7 +60,8 @@ namespace FelliGame.UI
 
             if (newElement.TopLeft.X < marginLeft || newElement.TopLeft.Y < marginTop)
             {
-                delta = new UIPosition(marginLeft - newElement.TopLeft.X, marginTop - newElement.TopLeft.Y);
+                delta = new UIPosition(marginLeft - newElement.TopLeft.X, 
+                    marginTop - newElement.TopLeft.Y);
 
                 newElement.Move(delta);
             }
@@ -71,12 +75,15 @@ namespace FelliGame.UI
         }
 
         /// <summary>
-        /// Add a new <see cref="UIElement"/> to the screen using another element's anchor point.
+        /// Add a new <see cref="UIElement"/> to the screen using another 
+        /// element's anchor point.
         /// </summary>
         /// <param name="newElement">The new <see cref="UIElement"/>.</param>
-        /// <param name="elementForAnchor">The name (Id) of the element to be used as anchor.</param>
+        /// <param name="elementForAnchor">The name (Id) of the element to be 
+        /// used as anchor.</param>
         /// <param name="anchor">The anchor point to be used.</param>
-        public void Add(UIElement newElement, string elementForAnchor, AnchorPoint anchor = AnchorPoint.BottomLeft)
+        public void Add(UIElement newElement, string elementForAnchor, 
+            AnchorPoint anchor = AnchorPoint.BottomLeft)
         {
             UIPosition position, anchorPosition;
             UIElement anchorElement = GetElementByName(elementForAnchor);

@@ -1,0 +1,3 @@
+# C#  files
+[*.cs]
+guidelines = 80, 120

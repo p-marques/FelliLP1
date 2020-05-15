@@ -62,28 +62,40 @@ namespace FelliGame.UI.Entities
 
         public override int Height 
         { 
-            get { return padding * 2 + titleTextMargin + textButtonsMargin + 3 + dialogButtonTopBottomPadding * 2; }
+            get 
+            { 
+                return padding * 2 + titleTextMargin + 
+                    textButtonsMargin + 3 + dialogButtonTopBottomPadding * 2; 
+            }
         }
 
         /// <summary>
         /// Created a new instance of <see cref="UIDialog"/>.
         /// </summary>
-        /// <param name="name">The name given to the dialog. This is basically an ID.</param>
+        /// <param name="name">The name given to the dialog. 
+        /// This is basically an ID.</param>
         /// <param name="position">The anchor position of this element.</param>
         /// <param name="title">The title of the dialog.</param>
         /// <param name="text">The text for the body of the dialog.</param>
         /// <param name="button1Text">The text for the first button.</param>
         /// <param name="button2Text">The text for the second button.</param>
         /// <param name="padding">The padding to add to the entire dialog.</param>
-        /// <param name="titleTextMargin">The margin between the title and the text.</param>
-        /// <param name="textButtonsMargin">The margin between the text and the buttons.</param>
+        /// <param name="titleTextMargin">The margin between the title and the 
+        /// text.</param>
+        /// <param name="textButtonsMargin">The margin between the text and the 
+        /// buttons.</param>
         /// <param name="buttonsMargin">The margin between the buttons.</param>
         /// <param name="colorTitleFg">The title's foreground color.</param>
         /// <param name="colorBg">The background color for the dialog.</param>
         /// <param name="colorFg">The foreground color for the dialog.</param>
-        public UIDialog(string name, UIPosition position, string title, string text, string button1Text, string button2Text,
-            int padding = 1, int titleTextMargin = 1, int textButtonsMargin = 2, int buttonsMargin = 1, 
-            ConsoleColor colorTitleFg = UISettings.ColorDialogTitleFg, ConsoleColor colorBg = UISettings.ColorDialogBg, ConsoleColor colorFg = UISettings.ColorDialogFg) : base(name, position, colorBg, colorFg)
+        public UIDialog(string name, UIPosition position, string title, 
+            string text, string button1Text, string button2Text,
+            int padding = 1, int titleTextMargin = 1, int textButtonsMargin = 2, 
+            int buttonsMargin = 1, 
+            ConsoleColor colorTitleFg = UISettings.ColorDialogTitleFg, 
+            ConsoleColor colorBg = UISettings.ColorDialogBg, 
+            ConsoleColor colorFg = UISettings.ColorDialogFg) 
+            : base(name, position, colorBg, colorFg)
         {
             this.title = title;
 
@@ -101,10 +113,19 @@ namespace FelliGame.UI.Entities
 
             this.buttons = new UIButton[2]
             {
-                new UIButton("dialogBtn1", this.TopLeft, button1Text, 2, dialogButtonTopBottomPadding, UISettings.ColorDialogButtonBg,
-                UISettings.ColorDialogButtonFg, UISettings.ColorDialogButtonHoverBg, UISettings.ColorDialogButtonHoverFg),
-                new UIButton("dialogBtn2", this.TopRight, button2Text, 2, dialogButtonTopBottomPadding, UISettings.ColorDialogButtonBg,
-                UISettings.ColorDialogButtonFg, UISettings.ColorDialogButtonHoverBg, UISettings.ColorDialogButtonHoverFg)
+                new UIButton("dialogBtn1", this.TopLeft, button1Text, 2, 
+                dialogButtonTopBottomPadding, 
+                UISettings.ColorDialogButtonBg,
+                UISettings.ColorDialogButtonFg, 
+                UISettings.ColorDialogButtonHoverBg, 
+                UISettings.ColorDialogButtonHoverFg),
+
+                new UIButton("dialogBtn2", this.TopRight, button2Text, 2, 
+                dialogButtonTopBottomPadding, 
+                UISettings.ColorDialogButtonBg,
+                UISettings.ColorDialogButtonFg, 
+                UISettings.ColorDialogButtonHoverBg, 
+                UISettings.ColorDialogButtonHoverFg)
             };
         }
 
@@ -189,13 +210,20 @@ namespace FelliGame.UI.Entities
         /// </summary>
         private void ShowButtons()
         {
+            int x, y;
             UIPosition position;
 
-            position = new UIPosition(this.BottomRight.X - 1 - padding - this.buttons[1].Width, this.BottomRight.Y - padding - this.buttons[1].Height);
+            x = this.BottomRight.X - 1 - padding - this.buttons[1].Width;
+            y = this.BottomRight.Y - padding - this.buttons[1].Height;
+
+            position = new UIPosition(x, y);
 
             this.buttons[1].SetPosition(position);
 
-            position = new UIPosition(this.buttons[1].TopLeft.X - buttonsMarging - this.buttons[1].Width, this.buttons[1].TopLeft.Y);
+            x = this.buttons[1].TopLeft.X - buttonsMarging - this.buttons[1].Width;
+            y = this.buttons[1].TopLeft.Y;
+
+            position = new UIPosition(x, y);
 
             this.buttons[0].SetPosition(position);
 
@@ -207,7 +235,8 @@ namespace FelliGame.UI.Entities
         /// <summary>
         /// Sets the hovered button by its index.
         /// </summary>
-        /// <param name="index">The index of an element in <see cref="buttons"/></param>
+        /// <param name="index">The index of an element in 
+        /// <see cref="buttons"/></param>
         private void SetHoveredButton(int index)
         {
             if (buttons[index].IsHovered)

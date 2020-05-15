@@ -73,7 +73,11 @@ namespace FelliGame.UI.Entities
         /// </summary>
         public UIPosition BottomMiddle 
         { 
-            get { return new UIPosition(TopLeft.X + (int)(Width / 2), TopLeft.Y + Height); }
+            get 
+            { 
+                return new UIPosition(TopLeft.X + (int)(Width / 2), 
+                                        TopLeft.Y + Height); 
+            }
         }
 
         /// <summary>
@@ -115,14 +119,20 @@ namespace FelliGame.UI.Entities
         /// <summary>
         /// Base constructor.
         /// </summary>
-        /// <param name="name">The name given to the element. This is basically an ID.</param>
+        /// <param name="name">The name given to the element. 
+        /// This is basically an ID.</param>
         /// <param name="position">The anchor position of this element.</param>
         /// <param name="colorBg">The background color of the element.</param>
         /// <param name="colorFg">The foreground color of the element.</param>
-        /// <param name="colorHoverBg">The background color of the element when hovered.</param>
-        /// <param name="colorHoverFg">The foreground color of the element when hovered.</param>
-        public UIElement(string name, UIPosition position, ConsoleColor colorBg, ConsoleColor colorFg, 
-            ConsoleColor colorHoverBg = UISettings.ColorConsoleBg, ConsoleColor colorHoverFg = UISettings.ColorConsoleFg)
+        /// <param name="colorHoverBg">The background color of the element when 
+        /// hovered.</param>
+        /// <param name="colorHoverFg">The foreground color of the element when 
+        /// hovered.</param>
+        public UIElement(string name, UIPosition position, 
+            ConsoleColor colorBg, 
+            ConsoleColor colorFg, 
+            ConsoleColor colorHoverBg = UISettings.ColorConsoleBg, 
+            ConsoleColor colorHoverFg = UISettings.ColorConsoleFg)
         {
             this.Name = name;
 
@@ -149,7 +159,8 @@ namespace FelliGame.UI.Entities
         /// <summary>
         /// Moves the anchor point.
         /// </summary>
-        /// <param name="delta">A <see cref="UIPosition"/> representative of the desired move delta.</param>
+        /// <param name="delta">A <see cref="UIPosition"/> representative of the 
+        /// desired move delta.</param>
         public void Move(UIPosition delta)
         {
             this.TopLeft += delta;
@@ -183,7 +194,8 @@ namespace FelliGame.UI.Entities
 
         /// <summary>
         /// Draws the background of the element.
-        /// This uses the <see cref="Width"/> and <see cref="Height"/> of the element.
+        /// This uses the <see cref="Width"/> and <see cref="Height"/> 
+        /// of the element.
         /// </summary>
         protected void DrawBackground()
         {
@@ -203,8 +215,10 @@ namespace FelliGame.UI.Entities
         /// <summary>
         /// Sets the cursor position using the element's anchor point as base.
         /// </summary>
-        /// <param name="leftDelta">The delta value for <see cref="Console.CursorLeft"/>.</param>
-        /// <param name="topDelta">The delta value for <see cref="Console.CursorTop"/>.</param>
+        /// <param name="leftDelta">The delta value for 
+        /// <see cref="Console.CursorLeft"/>.</param>
+        /// <param name="topDelta">The delta value for 
+        /// <see cref="Console.CursorTop"/>.</param>
         protected void SetCursorDelta(int leftDelta, int topDelta)
         {
             Console.CursorLeft = TopLeft.X + leftDelta;

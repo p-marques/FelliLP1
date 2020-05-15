@@ -13,7 +13,8 @@ namespace FelliGame
         /// <summary>
         /// Program stating point.
         /// </summary>
-        /// <param name="args">Optional arguments. Allowed arguments: -h, -p1, -p2.</param>
+        /// <param name="args">Optional arguments. 
+        /// Allowed arguments: -h, -p1, -p2.</param>
         static void Main(string[] args)
         {
             // Handle arguments
@@ -25,7 +26,8 @@ namespace FelliGame
                 string errorsTitle;
 
                 // Error or Errors?
-                errorsTitle = options.ErrorMessages.Count == 1 ? "Error found:" : "Errors found:";
+                errorsTitle = options.ErrorMessages.Count == 1 ? 
+                    "Error found:" : "Errors found:";
 
                 Console.WriteLine(errorsTitle);
 

@@ -38,19 +38,27 @@ namespace FelliGame.UI.Entities
         /// <summary>
         /// Creates a new instance of <see cref="UIButton"/>.
         /// </summary>
-        /// <param name="name">The name given to the element. This is basically an ID.</param>
+        /// <param name="name">The name given to the element. 
+        /// This is basically an ID.</param>
         /// <param name="position">The anchor position of this element.</param>
         /// <param name="text">The text to be displayed.</param>
-        /// <param name="leftRightPadding">The ammount of padding to the left and right.</param>
-        /// <param name="topBottomPadding">The ammount of padding to the top and bottom.</param>
+        /// <param name="leftRightPadding">The ammount of padding 
+        /// to the left and right.</param>
+        /// <param name="topBottomPadding">The ammount of padding 
+        /// to the top and bottom.</param>
         /// <param name="colorBg">The background color of the button.</param>
         /// <param name="colorFg">The foreground color of the button.</param>
-        /// <param name="colorHoverBg">The background color of the button when hovered.</param>
-        /// <param name="colorHoverFg">The foreground color of the button when hovered.</param>
-        public UIButton(string name, UIPosition position, string text, int leftRightPadding = 1, int topBottomPadding = 1,
-            ConsoleColor colorBg = UISettings.ColorButtonBg, ConsoleColor colorFg = UISettings.ColorButtonFg,
+        /// <param name="colorHoverBg">The background color of the button 
+        /// when hovered.</param>
+        /// <param name="colorHoverFg">The foreground color of the button 
+        /// when hovered.</param>
+        public UIButton(string name, UIPosition position, string text, 
+            int leftRightPadding = 1, int topBottomPadding = 1,
+            ConsoleColor colorBg = UISettings.ColorButtonBg, 
+            ConsoleColor colorFg = UISettings.ColorButtonFg,
             ConsoleColor colorHoverBg = UISettings.ColorButtonHoverBg,
-            ConsoleColor colorHoverFg = UISettings.ColorButtonHoverFg) : base(name, position, colorBg, colorFg, colorHoverBg, colorHoverFg)
+            ConsoleColor colorHoverFg = UISettings.ColorButtonHoverFg) 
+            : base(name, position, colorBg, colorFg, colorHoverBg, colorHoverFg)
         {
             this.text = text;
             this.leftRightPadding = leftRightPadding;

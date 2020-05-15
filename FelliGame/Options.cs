@@ -36,7 +36,8 @@ namespace FelliGame
         public OptionsParserResult ParserResult { get; private set; }
 
         /// <summary>
-        /// A collection of error messages describing any errors found during parsing.
+        /// A collection of error messages describing any errors found 
+        /// during parsing.
         /// </summary>
         public IList<string> ErrorMessages { get; private set; }
 
@@ -45,8 +46,8 @@ namespace FelliGame
             validOptions = new List<string>() { "-p1", "-p2" };
             HelpMessages = new string[2]
             {
-                "-p1:  The name of Player 1. Must have length between 2 and 15. Default = Player <color>.",
-                "-p2:  The name of Player 2. Must have length between 2 and 15. Default = Player <color>."
+                "-p1: The name of Player 1. Must have length between 2 and 15.",
+                "-p2: The name of Player 2. Must have length between 2 and 15."
             };
         }
 
@@ -55,7 +56,8 @@ namespace FelliGame
         /// the parsed data and returns the object.
         /// </summary>
         /// <param name="args">Command line arguments.</param>
-        /// <returns>A <see cref="Options"/> object containing the game options.</returns>
+        /// <returns>A <see cref="Options"/> object containing 
+        /// the game options.</returns>
         public static Options ParseOptions(string[] args)
         {
             Options op = new Options();
@@ -67,7 +69,8 @@ namespace FelliGame
                 return op;
             }
 
-            IDictionary<string, string> optionsValues = new Dictionary<string, string>();
+            IDictionary<string, string> optionsValues = 
+                new Dictionary<string, string>();
 
             optionsValues["-p1"] = "Player A";
             optionsValues["-p2"] = "Player B";
