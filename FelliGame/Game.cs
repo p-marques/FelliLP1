@@ -16,9 +16,14 @@ namespace FelliGame
         private readonly Options gameOptions;
 
         /// <summary>
+        /// The game's board.
+        /// </summary>
+        private readonly Board board;
+
+        /// <summary>
         /// The players.
         /// </summary>
-        public Player[] Players { get; }
+        private readonly Player[] players;
 
         /// <summary>
         /// Creates a new instance of <see cref="Game"/>.
@@ -28,11 +33,13 @@ namespace FelliGame
         {
             gameOptions = options;
 
-            Players = new Player[]
+            players = new Player[]
             {
                 new Player(options.PlayerAName),
                 new Player(options.PlayerBName)
             };
+
+            board = new Board();
         }
 
         /// <summary>
@@ -45,15 +52,17 @@ namespace FelliGame
 
             Program.UIManager.RefreshUI();
 
-            playerIndexBlack = Program.UIManager.PromptPlayerSelection(Players, 
+            playerIndexBlack = Program.UIManager.PromptPlayerSelection(players, 
                                 "Who plays with the black pieces?");
 
             Program.UIManager.RefreshUI();
 
             playerIndexWhite = playerIndexBlack == 1 ? 0 : 1;
 
-            Players[playerIndexBlack].CreatePieces(PieceColor.Black);
-            Players[playerIndexWhite].CreatePieces(PieceColor.White);
+            players[playerIndexBlack].CreatePieces(PieceColor.Black);
+            players[playerIndexWhite].CreatePieces(PieceColor.White);
+
+            board.SetupPlayersPieces(players);
 
             while (playing)
             {

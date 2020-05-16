@@ -15,6 +15,11 @@ namespace FelliGame
         public int Id { get; }
 
         /// <summary>
+        /// A reference to this piece's location.
+        /// </summary>
+        public BoardSquare Square { get; private set; }
+
+        /// <summary>
         /// The <see cref="Player"/> who owns this piece.
         /// </summary>
         public Player Owner { get; }
@@ -33,6 +38,15 @@ namespace FelliGame
             this.Id = id;
             this.Owner = player;
             this.Color = color;
+        }
+
+        /// <summary>
+        /// Sets the reference to the current location of this piece.
+        /// </summary>
+        /// <param name="square">The current square this piece is at.</param>
+        public void SetBoardSquareReference(BoardSquare square)
+        {
+            Square = square;
         }
     }
 }
