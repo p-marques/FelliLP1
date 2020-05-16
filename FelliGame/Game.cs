@@ -76,14 +76,33 @@ namespace FelliGame
                 currentPlayerIndex = PlayerPlay(currentPlayerIndex);
 
                 playing = currentPlayerIndex < 0 ? false : true;
+
+                if (playing)
+                {
+                    if (players[currentPlayerIndex].Pieces.Length == 0)
+                    {
+                        currentPlayerIndex = GetNextPlayerIndex(currentPlayerIndex);
+
+                        Program.UIManager
+                            .DisplayEndGameScreen(players[currentPlayerIndex]);
+
+                        playing = false;
+                    }
+                }
+                else
+                {
+                    Program.UIManager.DisplayEndGameScreen();
+                }
             }
         }
 
         /// <summary>
         /// Perform a full play by a player.
         /// </summary>
-        /// <param name="currentPlayerIndex">The index of the current player.</param>
-        /// <returns>A value representative of the next player's index.</returns>
+        /// <param name="currentPlayerIndex">The index of the current player.
+        /// </param>
+        /// <returns>A value representative of the next player's index.
+        /// </returns>
         private int PlayerPlay(int currentPlayerIndex)
         {
             BoardMove move;
@@ -95,8 +114,8 @@ namespace FelliGame
                 board.MovePiece(move);
             }
 
-            // Returning -1 is handled upstream as a signal by this player that he desires
-            // to exit the game.
+            // Returning -1 is handled upstream as a signal by 
+            // this player that he desires to exit the game.
             return move.IsValid ? GetNextPlayerIndex(currentPlayerIndex) : -1;
         }
 

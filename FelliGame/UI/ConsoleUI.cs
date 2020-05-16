@@ -123,6 +123,33 @@ namespace FelliGame.UI
         }
 
         /// <summary>
+        /// Displays the end game screen.
+        /// </summary>
+        /// <param name="winner">Optional. If a player is provided he will be 
+        /// congratulated for the win.</param>
+        public void DisplayEndGameScreen(Player winner = null)
+        {
+            string content;
+            UITitle gameOver;
+            UIPosition pos = new UIPosition(0, 0);
+
+            Screen.Clear();
+
+            content = "Game Over!";
+
+            if (winner != null)
+            {
+                content += $" {winner.Name} has won! Congratulations!";
+            }
+
+            gameOver = new UITitle("gameover", pos, content, 30, 2);
+
+            Screen.Add(gameOver);
+
+            RefreshUI();
+        }
+
+        /// <summary>
         /// Adds the title to the screen.
         /// </summary>
         private void AddTitle()
