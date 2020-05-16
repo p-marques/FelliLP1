@@ -46,13 +46,17 @@ namespace FelliGame.UI
         public int PromptPlayerSelection(Player[] players, string title)
         {
             int value;
+            string helpText;
             UIPosition position;
             UIDialog dialog;
 
             position = new UIPosition(0, 1);
 
+            helpText = "Use A, D or ArrowLeft and ArrowRight to select one " +
+                        "of the buttons bellow and then press Enter.";
+
             dialog = new UIDialog("userSelection", position, title,
-                "Use A, D or ArrowLeft and ArrowRight to select one of the buttons bellow and then press Enter.", players[0].Name, players[1].Name);
+                helpText, players[0].Name, players[1].Name);
 
             Screen.Add(dialog, "title");
 
