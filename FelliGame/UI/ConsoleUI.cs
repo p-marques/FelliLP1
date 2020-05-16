@@ -16,10 +16,19 @@ namespace FelliGame.UI
         private Screen Screen { get; }
 
         /// <summary>
-        /// The UI element representative of the game's board.
+        /// A reference to the game title.
         /// </summary>
-        private UIFelliBoard Board => 
-                            Screen.GetElementByName("board") as UIFelliBoard;
+        private UITitle UITitleRef { get; set; }
+
+        /// <summary>
+        /// A reference to the game board.
+        /// </summary>
+        private UIFelliBoard UIBoardRef { get; set; }
+
+        /// <summary>
+        /// A reference to the info panel.
+        /// </summary>
+        private UIInfoPanel UIInfoPanelRef { get; set; }
 
         /// <summary>
         /// Creates a new instance of <see cref="ConsoleUI"/>.
@@ -50,7 +59,12 @@ namespace FelliGame.UI
         /// <returns>The move the player desires to make.</returns>
         public BoardMove PromptPlay(Player player)
         {
-            return this.Board.Play(player);
+            UIInfoPanelRef.UpdateContentByName("currentPlayer", 
+                                        $"Current player: {player.Name}");
+
+            UIInfoPanelRef.Display();
+
+            return this.UIBoardRef.Play(player);
         }
 
         /// <summary>
@@ -74,7 +88,7 @@ namespace FelliGame.UI
             dialog = new UIDialog("userSelection", position, title,
                 helpText, players[0].Name, players[1].Name);
 
-            Screen.Add(dialog, "title");
+            Screen.Add(dialog, UITitleRef.BottomLeft);
 
             dialog.Display();
 
@@ -101,7 +115,11 @@ namespace FelliGame.UI
                 IsCentered = true
             };
 
-            Screen.Add(felliBoard, "title", AnchorPoint.BottomMiddle);
+            Screen.Add(felliBoard, UITitleRef.BottomMiddle);
+
+            this.UIBoardRef = felliBoard;
+
+            AddInfoPanel();
         }
 
         /// <summary>
@@ -113,6 +131,58 @@ namespace FelliGame.UI
             UITitle appTitle = new UITitle("title", titlePos, "Felli", 30, 2);
 
             this.Screen.Add(appTitle);
+
+            UITitleRef = appTitle;
+        }
+
+        /// <summary>
+        /// Adds the info panel to the screen.
+        /// </summary>
+        private void AddInfoPanel()
+        {
+            UIPosition position;
+            UIText uiText;
+            UIInfoPanel infoPanel;
+
+            position = new UIPosition(0, 0);
+
+            infoPanel = new UIInfoPanel("info", position, 1);
+
+            uiText = new UIText("currentPlayer", position, "", 0, 5, 
+                UISettings.ColorInfoPanelBg, 
+                ConsoleColor.White, 
+                ConsoleColor.Red);
+
+            infoPanel.Add(uiText);
+
+            uiText = new UIText("availableInput0", position, "Available keys:", 
+                0, 0, UISettings.ColorInfoPanelBg, ConsoleColor.Black, 
+                UISettings.ColorInfoPanelBg);
+
+            infoPanel.Add(uiText);
+
+            uiText = new UIText("availableInput1", position, 
+                "    [A] / [D] or [ArrowLeft] / [ArrowRight]", 0, 0, 
+                UISettings.ColorInfoPanelBg, ConsoleColor.Black, 
+                UISettings.ColorInfoPanelBg);
+
+            infoPanel.Add(uiText);
+
+            uiText = new UIText("availableInput2", position, "    [Enter]", 0, 0, 
+                UISettings.ColorInfoPanelBg, ConsoleColor.Black, 
+                UISettings.ColorInfoPanelBg);
+
+            infoPanel.Add(uiText);
+
+            uiText = new UIText("availableInput3", position, "    [ESC]", 0, 0, 
+                UISettings.ColorInfoPanelBg, ConsoleColor.Black, 
+                UISettings.ColorInfoPanelBg);
+
+            infoPanel.Add(uiText);
+
+            Screen.Add(infoPanel, UITitleRef.BottomRight);
+
+            this.UIInfoPanelRef = infoPanel;
         }
     }
 }

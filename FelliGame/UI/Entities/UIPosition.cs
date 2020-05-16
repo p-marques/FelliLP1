@@ -41,5 +41,15 @@ namespace FelliGame.UI.Entities
         /// of a + b.</returns>
         public static UIPosition operator +(UIPosition a, UIPosition b) 
             => new UIPosition(a.X + b.X, a.Y + b.Y);
+
+        /// <summary>
+        /// - operator.
+        /// </summary>
+        /// <param name="a"><see cref="UIPosition"/> a.</param>
+        /// <param name="b"><see cref="UIPosition"/> b.</param>
+        /// <returns>New <see cref="UIPosition"/> that is the result 
+        /// of a - b.</returns>
+        public static UIPosition operator -(UIPosition a, UIPosition b)
+            => new UIPosition(a.X - b.X, a.Y - b.Y);
     }
 }

@@ -110,6 +110,16 @@ namespace FelliGame.UI
         public const ConsoleColor ColorBoardSquareHoverBg = ConsoleColor.Red;
 
         /// <summary>
+        /// The default background color for a info panel.
+        /// </summary>
+        public const ConsoleColor ColorInfoPanelBg = ConsoleColor.White;
+
+        /// <summary>
+        /// The default background color for a info panel.
+        /// </summary>
+        public const ConsoleColor ColorInfoPanelFg = ConsoleColor.Blue;
+
+        /// <summary>
         /// The default left margin for the screen.
         /// </summary>
         public const int ScreenMarginLeft = 1;

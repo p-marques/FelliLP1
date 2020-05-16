@@ -79,44 +79,19 @@ namespace FelliGame.UI
         /// element's anchor point.
         /// </summary>
         /// <param name="newElement">The new <see cref="UIElement"/>.</param>
-        /// <param name="elementForAnchor">The name (Id) of the element to be 
-        /// used as anchor.</param>
-        /// <param name="anchor">The anchor point to be used.</param>
-        public void Add(UIElement newElement, string elementForAnchor, 
-            AnchorPoint anchor = AnchorPoint.BottomLeft)
+        /// <param name="anchorPoint">The anchor point to be used.</param>
+        public void Add(UIElement newElement, UIPosition anchorPoint)
         {
-            UIPosition position, anchorPosition;
-            UIElement anchorElement = GetElementByName(elementForAnchor);
+            UIPosition position;
 
-            if (anchorElement == null)
-            {
-                return;
-            }
-
-            switch (anchor)
-            {
-                case AnchorPoint.BottomRight:
-                    anchorPosition = anchorElement.BottomRight;
-                    break;
-                case AnchorPoint.TopRight:
-                    anchorPosition = anchorElement.TopRight;
-                    break;
-                case AnchorPoint.BottomMiddle:
-                    anchorPosition = anchorElement.BottomMiddle;
-                    break;
-                default:
-                    anchorPosition = anchorElement.BottomLeft;
-                    break;
-            }
-
-            position = newElement.TopLeft + anchorPosition;
-
-            newElement.SetPosition(position);
+            position = newElement.TopLeft + anchorPoint;
 
             if (newElement.IsCentered)
             {
-                newElement.Move(new UIPosition(-(int)(newElement.Width / 2), 0));
+                position -= new UIPosition(newElement.Width / 2, 0);
             }
+
+            newElement.SetPosition(position);
 
             Elements.Add(newElement);
         }
@@ -162,26 +137,6 @@ namespace FelliGame.UI
             {
                 Elements[i].Display();
             }
-        }
-
-        /// <summary>
-        /// Get UI Element by name (Id).
-        /// </summary>
-        /// <param name="name">The name (Id) of the UI Element.</param>
-        /// <returns>The element with the given name or null if none found.</returns>
-        public UIElement GetElementByName(string name)
-        {
-            UIElement element = null;
-
-            for (int i = 0; i < Elements.Count; i++)
-            {
-                if (Elements[i].Name == name)
-                {
-                    element = Elements[i];
-                }
-            }
-
-            return element;
         }
     }
 }
