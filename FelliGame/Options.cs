@@ -60,6 +60,7 @@ namespace FelliGame
         /// the game options.</returns>
         public static Options ParseOptions(string[] args)
         {
+            IDictionary<string, string> optionsValues;
             Options op = new Options();
 
             // If player asked for help just get out.
@@ -69,11 +70,11 @@ namespace FelliGame
                 return op;
             }
 
-            IDictionary<string, string> optionsValues = 
-                new Dictionary<string, string>();
-
-            optionsValues["-p1"] = "Player A";
-            optionsValues["-p2"] = "Player B";
+            optionsValues = new Dictionary<string, string>
+            {
+                ["-p1"] = "Player A",
+                ["-p2"] = "Player B"
+            };
 
             // For clarity since default value is 0 (Ok)
             op.ParserResult = OptionsParserResult.Ok;
@@ -94,6 +95,7 @@ namespace FelliGame
                     {
                         parsedOptions.Add(args[i]);
 
+                        // Value pair exists?
                         if (args.Length > i + 1)
                         {
                             optionsValues[args[i]] = args[i + 1];

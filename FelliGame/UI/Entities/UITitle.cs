@@ -103,7 +103,7 @@ namespace FelliGame.UI.Entities
 
             Console.BackgroundColor = borderColor;
 
-            for (int k = 0; k < Height; k++, NewLine())
+            for (int k = 0; k < Height; k++)
             {
                 SetCursorDelta(0, k);
 

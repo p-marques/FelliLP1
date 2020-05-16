@@ -96,6 +96,7 @@ namespace FelliGame.UI.Entities
 
             for (int i = 0; i < content.Count; i++)
             {
+                // First element uses the info panel's TopLeft as reference.
                 if (previous == null)
                 {
                     position = new UIPosition(this.TopLeft.X + padding, 
@@ -105,6 +106,7 @@ namespace FelliGame.UI.Entities
 
                     previous = content[i];
                 }
+                // Other elements use the previous one has reference.
                 else
                 {
                     content[i].SetPosition(previous.BottomLeft);

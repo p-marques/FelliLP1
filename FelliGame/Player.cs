@@ -67,6 +67,7 @@ namespace FelliGame
 
             holder.Square.RemovePiece();
 
+            // New array is all of the previous pieces - the piece being removed.
             Pieces = Pieces.Where(x => x.Id != id).ToArray();
         }
 
@@ -77,6 +78,10 @@ namespace FelliGame
         /// <param name="color">The color </param>
         private void UpdateName()
         {
+            // This are the defaut names coming in from Options. 
+            // If they're still set to that it means that the user 
+            // didn't pass in any custom names, so we use the piece color
+            // selection to set their names.
             if (Name == "Player A" || Name == "Player B")
             {
                 switch (PiecesColor)

@@ -52,18 +52,24 @@ namespace FelliGame
 
             Program.UIManager.RefreshUI();
 
+            // Ask who gets the black pieces.
             playerIndexBlack = Program.UIManager.PromptPlayerSelection(players, 
                                 "Who plays with the black pieces?");
 
             Program.UIManager.RefreshUI();
 
+            // Set the white pieces player as the opposite of the selected above
+            // as the black pieces player.
             playerIndexWhite = playerIndexBlack == 1 ? 0 : 1;
 
+            // Create the pieces...
             players[playerIndexBlack].CreatePieces(PieceColor.Black);
             players[playerIndexWhite].CreatePieces(PieceColor.White);
 
+            // ...and add them to the board.
             board.SetupPlayersPieces(players);
 
+            // Ask who plays first.
             currentPlayerIndex = Program.UIManager.PromptPlayerSelection(players,
                                                             "Who plays first?");
             
@@ -75,14 +81,21 @@ namespace FelliGame
             {
                 currentPlayerIndex = PlayerPlay(currentPlayerIndex);
 
+                // If currentPlayerIndex is below 0 that means the player
+                // refused to perform a move. This is treated as an instruction
+                // to quit the game.
                 playing = currentPlayerIndex < 0 ? false : true;
 
                 if (playing)
                 {
+                    // If the player that will perform the next play doesn't
+                    // have pieces...
                     if (players[currentPlayerIndex].Pieces.Length == 0)
                     {
+                        // ...get the winner player index...
                         currentPlayerIndex = GetNextPlayerIndex(currentPlayerIndex);
 
+                        // ...and congratulate him.
                         Program.UIManager
                             .DisplayEndGameScreen(players[currentPlayerIndex]);
 

@@ -58,17 +58,20 @@ namespace FelliGame.UI
         {
             UIPosition delta;
 
+            // If element isn't respecting the screen's margins...
             if (newElement.TopLeft.X < marginLeft || newElement.TopLeft.Y < marginTop)
             {
+                // ...calculate necessary move...
                 delta = new UIPosition(marginLeft - newElement.TopLeft.X, 
                     marginTop - newElement.TopLeft.Y);
 
+                // ...and make it.
                 newElement.Move(delta);
             }
 
             if (newElement.IsCentered)
             {
-                newElement.Move(new UIPosition(-(int)(newElement.Width / 2), 0));
+                newElement.Move(new UIPosition(-(newElement.Width / 2), 0));
             }
 
             Elements.Add(newElement);

@@ -83,7 +83,7 @@ namespace FelliGame.UI.Entities
         {
             if (HasPiece)
             {
-                SetCursorDelta((int)(squareSize / 2), padding);
+                SetCursorDelta((squareSize / 2), padding);
 
                 Console.ForegroundColor = GetPieceConsoleColor(Square.Piece.Color);
 

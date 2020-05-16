@@ -14,7 +14,7 @@ namespace FelliGame
         /// Get values of given enum.
         /// </summary>
         /// <typeparam name="T">The enum type.</typeparam>
-        /// <returns></returns>
+        /// <returns>Array with all values in enum.</returns>
         public static T[] GetEnumValues<T>()
         {
             return Enum.GetValues(typeof(T)).Cast<T>().ToArray();

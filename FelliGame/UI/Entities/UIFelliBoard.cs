@@ -82,6 +82,8 @@ namespace FelliGame.UI.Entities
 
             while (true)
             {
+                // Get all squares that have a piece belonging to the current 
+                // player and piece has possible moves.
                 availableForSelection = 
                             GetAllSquaresWithPiecesOfColor(player.PiecesColor);
 
@@ -98,8 +100,10 @@ namespace FelliGame.UI.Entities
 
                 pieceToMove = availableForSelection[index];
 
+                // Get possible moves by the selected piece.
                 possibleMoves = board.GetPossibleMoves(pieceToMove.Piece);
 
+                // Get all possible destinations.
                 availableForSelection = GetPossibleDestinations(possibleMoves);
 
                 index = GetPlayerSelectSquare(availableForSelection);
@@ -108,6 +112,8 @@ namespace FelliGame.UI.Entities
                 // selection...
                 if (index < 0)
                 {
+                    pieceToMove.IsHovered = false;
+
                     // ...signaling desire to go back to piece selection.
                     continue;
                 }
@@ -119,6 +125,8 @@ namespace FelliGame.UI.Entities
                 break;
             }
 
+            // Returning BoardMove.Piece == null will signal an intention to
+            // quit the game.
             return new BoardMove(pieceToMove?.Piece, 
                                 selectedMove.Destination, 
                                 selectedMove.PieceEaten);
@@ -248,6 +256,7 @@ namespace FelliGame.UI.Entities
                 {
                     bool hasMoves = board.GetPieceHasPossibleMoves(piecesInRow[j].Piece);
 
+                    // Same color and has possible moves
                     if (piecesInRow[j].Piece.Color == pieceColor && hasMoves)
                         squares.Add(piecesInRow[j]);
                 }
@@ -265,6 +274,7 @@ namespace FelliGame.UI.Entities
 
             for (int i = 0; i < rows.Length; i++)
             {
+                // Center the row
                 int x = (this.Width - rows[i].Width) / 2;
 
                 rows[i].SetPosition(this.TopLeft);

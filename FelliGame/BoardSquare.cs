@@ -22,10 +22,7 @@ namespace FelliGame
         /// <summary>
         /// Flag signaling the presence of a piece on this square.
         /// </summary>
-        public bool HasPiece
-        {
-            get { return Piece != null; }
-        }
+        public bool HasPiece => Piece != null;
 
         /// <summary>
         /// Creates a new instance of <see cref="BoardSquare"/>.

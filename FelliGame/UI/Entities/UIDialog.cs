@@ -138,10 +138,10 @@ namespace FelliGame.UI.Entities
             ConsoleKey userInput;
             int selected = 0;
 
-            SetHoveredButton(selected);
-
             while (true)
             {
+                SetHoveredButton(selected);
+
                 userInput = GetUserInputKey();
 
                 if (userInput == ConsoleKey.Enter)
@@ -155,8 +155,6 @@ namespace FelliGame.UI.Entities
                 {
                     continue;
                 }
-
-                SetHoveredButton(selected);
             }
 
             return selected;
@@ -213,13 +211,17 @@ namespace FelliGame.UI.Entities
             int x, y;
             UIPosition position;
 
-            x = this.BottomRight.X - 1 - padding - this.buttons[1].Width;
+            // Calculate position of the button to the right, using the
+            // dialog's bottom right point.
+            x = this.BottomRight.X - padding - this.buttons[1].Width;
             y = this.BottomRight.Y - padding - this.buttons[1].Height;
 
             position = new UIPosition(x, y);
 
             this.buttons[1].SetPosition(position);
 
+            // Calculate position of the button to the left from the position
+            // of the button to the right.
             x = this.buttons[1].TopLeft.X - buttonsMarging - this.buttons[1].Width;
             y = this.buttons[1].TopLeft.Y;
 
@@ -253,7 +255,7 @@ namespace FelliGame.UI.Entities
         }
 
         /// <summary>
-        /// Gets the selected button.
+        /// Gets the index of the selected button.
         /// </summary>
         /// <param name="key">A user inputed <see cref="ConsoleKey"/>.</param>
         /// <returns>The index of the selected button.</returns>
@@ -261,6 +263,8 @@ namespace FelliGame.UI.Entities
         {
             int index;
 
+            // A, LeftArrow -> returns 0, which is the left button.
+            // D, RightArrow -> returns 1, which is the right button.
             switch (key)
             {
                 case ConsoleKey.A:

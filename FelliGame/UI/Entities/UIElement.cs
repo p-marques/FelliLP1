@@ -75,7 +75,7 @@ namespace FelliGame.UI.Entities
         { 
             get 
             { 
-                return new UIPosition(TopLeft.X + (int)(Width / 2), 
+                return new UIPosition(TopLeft.X + (Width / 2), 
                                         TopLeft.Y + Height); 
             }
         }
@@ -184,15 +184,6 @@ namespace FelliGame.UI.Entities
         }
 
         /// <summary>
-        /// Correctly moves to a new line using anchor point.
-        /// </summary>
-        protected void NewLine()
-        {
-            Console.CursorLeft = TopLeft.X;
-            Console.CursorTop = TopLeft.Y + 1;
-        }
-
-        /// <summary>
         /// Draws the background of the element.
         /// This uses the <see cref="Width"/> and <see cref="Height"/> 
         /// of the element.
@@ -201,10 +192,12 @@ namespace FelliGame.UI.Entities
         {
             Console.BackgroundColor = BackgroundColor;
 
-            for (int k = 0; k < Height; k++, NewLine())
+            // Every line...
+            for (int k = 0; k < Height; k++)
             {
                 SetCursorDelta(0, k);
 
+                // ...and every "column".
                 for (int i = 0; i < Width; i++)
                 {
                     Console.Write(" ");
@@ -215,10 +208,12 @@ namespace FelliGame.UI.Entities
         /// <summary>
         /// Sets the cursor position using the element's anchor point as base.
         /// </summary>
-        /// <param name="leftDelta">The delta value for 
-        /// <see cref="Console.CursorLeft"/>.</param>
-        /// <param name="topDelta">The delta value for 
-        /// <see cref="Console.CursorTop"/>.</param>
+        /// <param name="leftDelta">
+        /// The delta value for <see cref="Console.CursorLeft"/>.
+        /// </param>
+        /// <param name="topDelta">
+        /// The delta value for <see cref="Console.CursorTop"/>.
+        /// </param>
         protected void SetCursorDelta(int leftDelta, int topDelta)
         {
             Console.CursorLeft = TopLeft.X + leftDelta;

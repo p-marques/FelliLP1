@@ -108,6 +108,7 @@ namespace FelliGame.UI.Entities
         {
             UIPosition deltaPosition;
 
+            // First square ignores spacing
             for (int i = 0, spaceMult = 0; i < squares.Length; i++, spaceMult = 1)
             {
                 int spacing = squares[i].Width * squareSpacing * spaceMult * i;

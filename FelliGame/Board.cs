@@ -86,22 +86,28 @@ namespace FelliGame
             Direction[] directions = GetAvailableDirections(piece.Square.Pos);
             IList<BoardMove> possibleMoves = new List<BoardMove>();
 
+            // For all the available directions
             for (int i = 0; i < directions.Length; i++)
             {
+                // Get square in the current direction
                 holder = GetBoardSquareByDirection(piece.Square, directions[i]);
 
                 if (holder != null)
                 {
+                    // If there's no piece there...
                     if (!holder.HasPiece)
                     {
+                        // ...this move is possible.
                         move = new BoardMove(piece, holder, null);
                         possibleMoves.Add(move);
                     }
+                    // If there is a piece there but it's from the other player
                     else if (holder.Piece.Color != piece.Color)
                     {
                         eatenPiece = holder.Piece;
                         holder = GetBoardSquareByDirection(holder, directions[i]);
 
+                        // A EAT is possible?
                         if (holder != null && !holder.HasPiece)
                         {
                             move = new BoardMove(piece, holder, eatenPiece);
@@ -220,7 +226,8 @@ namespace FelliGame
         /// <param name="square">The reference square.</param>
         /// <param name="direction">The desired direction.</param>
         /// <returns>The square at the given direction.
-        /// Can be null, meaning no square exists in that direction.</returns>
+        /// Can be null, meaning no available square exists in that direction.
+        /// </returns>
         private BoardSquare GetBoardSquareByDirection(BoardSquare square, 
                                                         Direction direction)
         {

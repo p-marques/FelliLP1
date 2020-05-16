@@ -31,7 +31,8 @@ namespace FelliGame
         public bool IsValid => Piece != null && Destination != null;
 
         /// <summary>
-        /// Flag signaling that this move will result in a piece being eaten (eliminated).
+        /// Flag signaling that this move will result in a piece 
+        /// being eaten (eliminated).
         /// </summary>
         public bool IsEating => PieceEaten != null;
 
@@ -40,7 +41,8 @@ namespace FelliGame
         /// </summary>
         /// <param name="piece">The piece on the move.</param>
         /// <param name="destination">The destination of the piece.</param>
-        /// <param name="eaten">The piece being eaten (deleted) by the move.</param>
+        /// <param name="eaten">The piece being eaten (deleted) by the move.
+        /// </param>
         public BoardMove(Piece piece, BoardSquare destination, Piece eaten)
         {
             Piece = piece;
