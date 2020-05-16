@@ -38,6 +38,34 @@ namespace FelliGame.UI
         }
 
         /// <summary>
+        /// Prompts players to select one the players.
+        /// </summary>
+        /// <param name="players">The available options.</param>
+        /// <param name="title">The title for the dialog.</param>
+        /// <returns>Index value of the selected player.</returns>
+        public int PromptPlayerSelection(Player[] players, string title)
+        {
+            int value;
+            UIPosition position;
+            UIDialog dialog;
+
+            position = new UIPosition(0, 1);
+
+            dialog = new UIDialog("userSelection", position, title,
+                "Use A, D or ArrowLeft and ArrowRight to select one of the buttons bellow and then press Enter.", players[0].Name, players[1].Name);
+
+            Screen.Add(dialog, "title");
+
+            dialog.Display();
+
+            value = dialog.GetSelected();
+
+            Screen.Remove();
+
+            return value;
+        }
+
+        /// <summary>
         /// Adds the title to the screen.
         /// </summary>
         private void AddTitle()
