@@ -5,7 +5,8 @@ using System.Text;
 namespace FelliGame
 {
     /// <summary>
-    /// A struct capable of holding the position of a board square on the game board.
+    /// A struct capable of holding the position of a board square on 
+    /// the game board.
     /// </summary>
     public struct Coord
     {
@@ -29,5 +30,14 @@ namespace FelliGame
             Column = column;
             Row = row;
         }
+
+        /// <summary>
+        /// + operator.
+        /// </summary>
+        /// <param name="a"><see cref="Coord"/> a.</param>
+        /// <param name="b"><see cref="Coord"/> b.</param>
+        /// <returns>The result of a + b.</returns>
+        public static Coord operator +(Coord a, Coord b) => 
+                                new Coord(a.Row + b.Row, a.Column + b.Column);
     }
 }

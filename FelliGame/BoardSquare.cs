@@ -56,5 +56,13 @@ namespace FelliGame
 
             piece.SetBoardSquareReference(this);
         }
+
+        /// <summary>
+        /// Removes the piece of this square.
+        /// </summary>
+        public void RemovePiece()
+        {
+            this.Piece = null;
+        }
     }
 }

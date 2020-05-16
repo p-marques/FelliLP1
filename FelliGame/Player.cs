@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace FelliGame
@@ -54,6 +55,19 @@ namespace FelliGame
             PiecesColor = color;
 
             UpdateName();
+        }
+
+        /// <summary>
+        /// Removes a piece with a given Id.
+        /// </summary>
+        /// <param name="id">The id of the piece to be removed.</param>
+        public void RemovePieceById(int id)
+        {
+            Piece holder = Pieces.Single(z => id == z.Id);
+
+            holder.Square.RemovePiece();
+
+            Pieces = Pieces.Where(x => x.Id != id).ToArray();
         }
 
         /// <summary>

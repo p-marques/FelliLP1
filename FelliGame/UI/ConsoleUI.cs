@@ -16,6 +16,12 @@ namespace FelliGame.UI
         private Screen Screen { get; }
 
         /// <summary>
+        /// The UI element representative of the game's board.
+        /// </summary>
+        private UIFelliBoard Board => 
+                            Screen.GetElementByName("board") as UIFelliBoard;
+
+        /// <summary>
         /// Creates a new instance of <see cref="ConsoleUI"/>.
         /// </summary>
         public ConsoleUI()
@@ -35,6 +41,16 @@ namespace FelliGame.UI
         public void RefreshUI()
         {
             this.Screen.Refresh();
+        }
+
+        /// <summary>
+        /// Prompts player to play.
+        /// </summary>
+        /// <param name="player">The player to be prompted.</param>
+        /// <returns>The move the player desires to make.</returns>
+        public BoardMove PromptPlay(Player player)
+        {
+            return this.Board.Play(player);
         }
 
         /// <summary>

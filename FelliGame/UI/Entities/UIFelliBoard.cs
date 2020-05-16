@@ -68,6 +68,195 @@ namespace FelliGame.UI.Entities
         }
 
         /// <summary>
+        /// Performs a full play cycle.
+        /// </summary>
+        /// <param name="player">The player who is playing.</param>
+        /// <returns>The desired move.</returns>
+        public BoardMove Play(Player player)
+        {
+            int index;
+            UIFelliSquare pieceToMove;
+            UIFelliSquare[] availableForSelection;
+            BoardMove[] possibleMoves;
+            BoardMove selectedMove = new BoardMove();
+
+            while (true)
+            {
+                availableForSelection = 
+                            GetAllSquaresWithPiecesOfColor(player.PiecesColor);
+
+                index = GetPlayerSelectSquare(availableForSelection);
+
+                // If index < 0 that means the player hit escape in piece
+                // selection...
+                if (index < 0)
+                {
+                    // ...signaling desire to exit the game.
+                    pieceToMove = null;
+                    break;
+                }
+
+                pieceToMove = availableForSelection[index];
+
+                possibleMoves = board.GetPossibleMoves(pieceToMove.Piece);
+
+                availableForSelection = GetPossibleDestinations(possibleMoves);
+
+                index = GetPlayerSelectSquare(availableForSelection);
+
+                // If index < 0 that means the player hit escape in destination 
+                // selection...
+                if (index < 0)
+                {
+                    // ...signaling desire to go back to piece selection.
+                    continue;
+                }
+
+                selectedMove = possibleMoves[index];
+
+                pieceToMove.IsHovered = false;
+                availableForSelection[index].IsHovered = false;
+                break;
+            }
+
+            return new BoardMove(pieceToMove?.Piece, 
+                                selectedMove.Destination, 
+                                selectedMove.PieceEaten);
+        }
+
+        /// <summary>
+        /// Gets the selected index in a collection.
+        /// </summary>
+        /// <param name="possibilities">The available options.</param>
+        /// <returns>An index value representative of the selected item.</returns>
+        private int GetPlayerSelectSquare(UIFelliSquare[] possibilities)
+        {
+            ConsoleKey userInput;
+            UIFelliSquare square;
+            int selectedIndex = 0;
+
+            while (true)
+            {
+                square = possibilities[selectedIndex];
+
+                square.IsHovered = true;
+
+                Display();
+
+                userInput = GetUserInputKey();
+
+                if (userInput == ConsoleKey.Enter)
+                {
+                    break;
+                }
+                else if (userInput == ConsoleKey.Escape)
+                {
+                    square.IsHovered = false;
+
+                    Display();
+
+                    // -1 is handled upstream has a cancellation of the action.
+                    selectedIndex = -1;
+
+                    break;
+                }
+
+                selectedIndex += GetIndexSelectionDelta(userInput);
+
+                // If the index would be outside of the array.
+                if (selectedIndex < 0)
+                {
+                    selectedIndex = possibilities.Length - 1;
+                }
+                else if (selectedIndex >= possibilities.Length)
+                {
+                    selectedIndex = 0;
+                }
+
+                square.IsHovered = false;
+            }
+
+            return selectedIndex;
+        }
+
+        /// <summary>
+        /// Gets all possible destinations in the given moves.
+        /// </summary>
+        /// <param name="moves">A collection of available moves.</param>
+        /// <returns>A collection of available destinations.</returns>
+        private UIFelliSquare[] GetPossibleDestinations(BoardMove[] moves)
+        {
+            IList<UIFelliSquare> result = new List<UIFelliSquare>();
+
+            for (int i = 0; i < moves.Length; i++)
+            {
+                result.Add(GetSquare(moves[i].Destination.Pos));
+            }
+
+            return result.ToArray();
+        }
+
+        /// <summary>
+        /// Get square by current position on the board.
+        /// </summary>
+        /// <param name="pos">The current position of the desired square.</param>
+        /// <returns>The square at the given position.</returns>
+        private UIFelliSquare GetSquare(Coord pos)
+        {
+            return rows[pos.Row].GetSquare(pos.Column);
+        }
+
+        /// <summary>
+        /// Get index selection delta given a inputed key.
+        /// </summary>
+        /// <param name="key">The key hit by the user.</param>
+        /// <returns>The delta value representative of the move along the index.</returns>
+        private int GetIndexSelectionDelta(ConsoleKey key)
+        {
+            int value = 0;
+
+            switch (key)
+            {
+                case ConsoleKey.D:
+                case ConsoleKey.RightArrow:
+                    value = 1;
+                    break;
+                case ConsoleKey.A:
+                case ConsoleKey.LeftArrow:
+                    value = -1;
+                    break;
+            }
+
+            return value;
+        }
+
+        /// <summary>
+        /// Get all squares with pieces of a given color.
+        /// Filters out squares with pieces without any available moves.
+        /// </summary>
+        /// <param name="pieceColor"></param>
+        /// <returns></returns>
+        private UIFelliSquare[] GetAllSquaresWithPiecesOfColor(PieceColor pieceColor)
+        {
+            IList<UIFelliSquare> squares = new List<UIFelliSquare>();
+
+            for (int i = 0; i < this.rows.Length; i++)
+            {
+                UIFelliSquare[] piecesInRow = this.rows[i].GetSquaresWithPieces();
+
+                for (int j = 0; j < piecesInRow.Length; j++)
+                {
+                    bool hasMoves = board.GetPieceHasPossibleMoves(piecesInRow[j].Piece);
+
+                    if (piecesInRow[j].Piece.Color == pieceColor && hasMoves)
+                        squares.Add(piecesInRow[j]);
+                }
+            }
+
+            return squares.ToArray();
+        }
+
+        /// <summary>
         /// Shows all rows.
         /// </summary>
         private void ShowRows()

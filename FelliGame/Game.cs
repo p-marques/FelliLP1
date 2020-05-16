@@ -73,8 +73,41 @@ namespace FelliGame
 
             while (playing)
             {
-                playing = false;
+                currentPlayerIndex = PlayerPlay(currentPlayerIndex);
+
+                playing = currentPlayerIndex < 0 ? false : true;
             }
+        }
+
+        /// <summary>
+        /// Perform a full play by a player.
+        /// </summary>
+        /// <param name="currentPlayerIndex">The index of the current player.</param>
+        /// <returns>A value representative of the next player's index.</returns>
+        private int PlayerPlay(int currentPlayerIndex)
+        {
+            BoardMove move;
+
+            move = Program.UIManager.PromptPlay(players[currentPlayerIndex]);
+
+            if (move.IsValid)
+            {
+                board.MovePiece(move);
+            }
+
+            // Returning -1 is handled upstream as a signal by this player that he desires
+            // to exit the game.
+            return move.IsValid ? GetNextPlayerIndex(currentPlayerIndex) : -1;
+        }
+
+        /// <summary>
+        /// Get the next player to play.
+        /// </summary>
+        /// <param name="currentIndex">The current's player index.</param>
+        /// <returns>A value representative of the next player's index.</returns>
+        private int GetNextPlayerIndex(int currentIndex)
+        {
+            return currentIndex == 0 ? 1 : 0;
         }
     }
 }
