@@ -47,7 +47,7 @@ namespace FelliGame
         /// </summary>
         public void Play()
         {
-            int playerIndexBlack, playerIndexWhite;
+            int playerIndexBlack, playerIndexWhite, currentPlayerIndex;
             bool playing = true;
 
             Program.UIManager.RefreshUI();
@@ -63,6 +63,13 @@ namespace FelliGame
             players[playerIndexWhite].CreatePieces(PieceColor.White);
 
             board.SetupPlayersPieces(players);
+
+            currentPlayerIndex = Program.UIManager.PromptPlayerSelection(players,
+                                                            "Who plays first?");
+            
+            Program.UIManager.AddBoard(board);
+
+            Program.UIManager.RefreshUI();
 
             while (playing)
             {

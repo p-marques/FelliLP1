@@ -70,6 +70,25 @@ namespace FelliGame.UI
         }
 
         /// <summary>
+        /// Adds the game's board to the screen.
+        /// </summary>
+        /// <param name="board"></param>
+        public void AddBoard(Board board)
+        {
+            UIPosition position;
+            UIFelliBoard felliBoard;
+
+            position = new UIPosition(0, 1);
+
+            felliBoard = new UIFelliBoard("board", position, board)
+            {
+                IsCentered = true
+            };
+
+            Screen.Add(felliBoard, "title", AnchorPoint.BottomMiddle);
+        }
+
+        /// <summary>
         /// Adds the title to the screen.
         /// </summary>
         private void AddTitle()

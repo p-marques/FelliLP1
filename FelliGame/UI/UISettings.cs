@@ -90,6 +90,26 @@ namespace FelliGame.UI
         public const ConsoleColor ColorDialogButtonHoverFg = ConsoleColor.White;
 
         /// <summary>
+        /// The default background color for a board row.
+        /// </summary>
+        public const ConsoleColor ColorBoardRowBg = ConsoleColor.Gray;
+
+        /// <summary>
+        /// The default background color for a board square.
+        /// </summary>
+        public const ConsoleColor ColorBoardSquareBg = ConsoleColor.DarkGray;
+
+        /// <summary>
+        /// The default foreground color for a board square.
+        /// </summary>
+        public const ConsoleColor ColorBoardSquareFg = ConsoleColor.DarkGray;
+
+        /// <summary>
+        /// The default background color for a hovered board square.
+        /// </summary>
+        public const ConsoleColor ColorBoardSquareHoverBg = ConsoleColor.Red;
+
+        /// <summary>
         /// The default left margin for the screen.
         /// </summary>
         public const int ScreenMarginLeft = 1;
