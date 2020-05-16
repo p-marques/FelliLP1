@@ -52,6 +52,9 @@ namespace FelliGame
 
             playerIndexWhite = playerIndexBlack == 1 ? 0 : 1;
 
+            Players[playerIndexBlack].CreatePieces(PieceColor.Black);
+            Players[playerIndexWhite].CreatePieces(PieceColor.White);
+
             while (playing)
             {
                 playing = false;
